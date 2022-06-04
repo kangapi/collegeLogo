@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+}
+
+.banner {
+    width: 100%;
+}
+
+.FlexContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    height: 80vh;
+    overflow: auto;
+    flex-direction: row;
+}
+
+.FlexContainer div {
+    width: 203px;
+    height: 200px;
+}
+
+.FlexContainer img {
+    width: 250px;
+}
