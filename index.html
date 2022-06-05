@@ -4,60 +4,44 @@
     <meta charset="UTF-8">
     <title>Collège Belledonne</title>
     <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
 </head>
 <body>
 <img  class="banner" src="assets/banner.png" alt="banner">
 
-<section class="FlexContainer">
-    <div class="shapeLogo">
-        <a href="https://ecosia.com">
-            <img src="assets/blueShape.png" class="shape">
-            <img src="https://upload.wikimedia.org/wikipedia/fr/1/11/Ecosia_logo.png" class="logo"/>
-        </a>
-    </div>
-    <div class="shapeLogo">
-        <a href="https://test.evalangcollege.fr/">
-            <img src="assets/blueShape.png" class="shape">
-            <img src="https://demo.evalang.fr/io/r/res_perso/manager/demo.evalang.fr/tpl/login/images/logo_w.png?v=20160105" class="logo"/>
-        </a>
-    </div>
-    <div class="shapeLogo">
-        <a href="https://www.qwantjunior.com/">
-            <img src="assets/blueShape.png" class="shape">
-            <img src="https://upload.wikimedia.org/wikipedia/fr/e/e3/Logo_Qwant_Junior_2018.png" class="logo"/>
-        </a>
-    </div>
-    <div class="shapeLogo">
-        <a href="https://google.com">
-            <img src="assets/greenShape.png" class="shape"/>
-            <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c51f.png" class="logo"/>
-        </a>
-    </div>
-    <div class="shapeLogo">
-        <a href="https://ecosia.com">
-            <img src="assets/greenShape.png" class="shape">
-            <img src="https://upload.wikimedia.org/wikipedia/fr/1/11/Ecosia_logo.png" class="logo"/>
-        </a>
-    </div>
-    <div class="shapeLogo">
-        <a href="https://www.qwantjunior.com/">
-            <img src="assets/redShape.png" class="shape">
-            <img src="https://upload.wikimedia.org/wikipedia/fr/e/e3/Logo_Qwant_Junior_2018.png" class="logo"/>
-        </a>
-    </div>
-    <div class="shapeLogo">
-        <a href="https://google.com">
-            <img src="assets/redShape.png" class="shape"/>
-            <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c51f.png" class="logo"/>
-        </a>
-    </div>
-    <div class="shapeLogo">
-        <a href="https://ecosia.com">
-            <img src="assets/redShape.png" class="shape">
-            <img src="https://upload.wikimedia.org/wikipedia/fr/1/11/Ecosia_logo.png" class="logo"/>
-        </a>
-    </div>
-</section>
+<section class="FlexContainer"></section>
+<script>
 
+    async function populate() {
+        var requestURL = 'http://localhost:3000/links';
+        var request = new XMLHttpRequest();
+        request.open('GET', requestURL, true);
+        request.responseType = 'json';
+        request.send();
+        request.onload = function() {
+            var linksJSON = request.response;
+            console.log(linksJSON);
+            populateHeader(linksJSON);
+        }
+    }
+
+
+    var header = document.querySelector('.FlexContainer');
+
+    function populateHeader(jsonObj) {
+        for (var i = 0; i < jsonObj.length; i++) {
+            var link = document.createElement('div');
+            link.className = 'shapeLogo';
+            link.innerHTML =
+                '<a href="' + jsonObj[i].url + '">' +
+                '<img src="' + "assets/" + jsonObj[i].shape + '" class="shape">' +
+                '<img src="' + jsonObj[i].logo + '" class="logo"/>' +
+                '</a>';
+            header.appendChild(link);
+        }
+    }
+
+    populate();
+</script>
 </body>
 </html>
