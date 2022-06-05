@@ -25,3 +25,28 @@
 .FlexContainer img {
     width: 250px;
 }
+
+.shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+div .logo {
+    width: 130px;
+    height: 130px;
+    position: relative;
+    top: 45px;
+    left: 60px;
+    filter: drop-shadow(0 0 #000);
+    object-fit: contain;
+}
+
+.shapeLogo {
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.shapeLogo:hover {
+    transform: scale(1.1);
+}
